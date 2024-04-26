@@ -8,8 +8,8 @@
       "args": [],
       "stopAtEntry": false,
       "externalConsole": true,
-      "cwd": "d:/NSU/cse225/event_manegement",
-      "program": "d:/NSU/cse225/event_manegement/build/Debug/outDebug",
+      "cwd": "d:/NSU/cse225/event_management_project",
+      "program": "d:/NSU/cse225/event_management_project/build/Debug/outDebug",
       "MIMode": "gdb",
       "miDebuggerPath": "gdb",
       "setupCommands": [

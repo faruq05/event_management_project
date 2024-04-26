@@ -9,7 +9,7 @@ EventLinkedList::EventLinkedList() : head(nullptr) {}
 
 // Destructor
 EventLinkedList::~EventLinkedList()
-{
+{   
     // Implement destructor to free memory (delete all nodes)
     EventNode *current = head;
     while (current != nullptr)
@@ -22,7 +22,10 @@ EventLinkedList::~EventLinkedList()
 
 // Insert a new event into the linked list
 void EventLinkedList::insertEvent(Event &e)
-{
+{   
+    if (hasScheduleConflict(e)) {
+        return; // Do not insert the event if there's a conflict
+    }
     EventNode *newNode = new EventNode(e);
     newNode->next = head;
     head = newNode;
@@ -96,6 +99,7 @@ void EventLinkedList::searchEventByTitle(string &title)
         {
             current->event.displayEventDetails();
             found = true;
+            break;
         }
         current = current->next;
     }
@@ -334,8 +338,8 @@ bool EventLinkedList::hasScheduleConflict(Event& newEvent) {
         // Check for overlap based on date and start time
         if (current->event.getDate() == newEvent.getDate() &&
             current->event.getStartTime() == newEvent.getStartTime()) {
-            cout << "Schedule conflict with the following event:" << endl;
-            current->event.displayEventDetails(); // Assuming displayEventDetails method exists in Event class
+            // cout << "Schedule conflict with the following event:" << endl;
+            // current->event.displayEventDetails(); // Assuming displayEventDetails method exists in Event class
             return true;
         }
         current = current->next;
