@@ -16,8 +16,8 @@ void displayMenu()
     cout << "5. Search Event by Title" << endl;
     cout << "6. Manage Attendees of an Event" << endl;
     cout << "7. Save Events to File" << endl;
-    cout << "8. Load Events from File" << endl;
-    cout << "9. Exit" << endl;
+    // cout << "8. Load Events from File" << endl;
+    cout << "8. Exit" << endl;
     cout << "=============================================" << endl;
     cout << "Enter your choice: ";
 }
@@ -117,21 +117,21 @@ int main()
             eventList.saveEventsToFile(filename);
             break;
         }
+        // case '8':
+        // {
+        //     string filename;
+        //     cout << "Enter filename to load events: ";
+        //     cin >> filename;
+        //     eventList.loadEventsFromFile(filename);
+        //     break;
+        // }
         case '8':
-        {
-            string filename;
-            cout << "Enter filename to load events: ";
-            cin >> filename;
-            eventList.loadEventsFromFile(filename);
-            break;
-        }
-        case '9':
             cout << "Exiting Campus Event Management System." << endl;
             break;
         default:
             cout << "Invalid choice. Please try again." << endl;
         }
-    } while (choice != '9');
+    } while (choice != '8');
 
     return 0;
 }
