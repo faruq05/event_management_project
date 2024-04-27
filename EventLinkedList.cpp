@@ -9,7 +9,7 @@ EventLinkedList::EventLinkedList() : head(nullptr) {}
 
 // Destructor
 EventLinkedList::~EventLinkedList()
-{   
+{
     // Implement destructor to free memory (delete all nodes)
     EventNode *current = head;
     while (current != nullptr)
@@ -22,8 +22,9 @@ EventLinkedList::~EventLinkedList()
 
 // Insert a new event into the linked list
 void EventLinkedList::insertEvent(Event &e)
-{   
-    if (hasScheduleConflict(e)) {
+{
+    if (hasScheduleConflict(e))
+    {
         return; // Do not insert the event if there's a conflict
     }
     EventNode *newNode = new EventNode(e);
@@ -110,7 +111,7 @@ void EventLinkedList::searchEventByTitle(string &title)
 }
 
 // Save all events in the linked list to a file
-void EventLinkedList::saveEventsToFile( string &filename)
+void EventLinkedList::saveEventsToFile(string &filename)
 {
     ofstream outFile(filename);
     if (!outFile)
@@ -127,10 +128,17 @@ void EventLinkedList::saveEventsToFile( string &filename)
                 << current->event.getDescription() << ","
                 << current->event.getDate() << ","
                 << current->event.getStartTime() << ","
-                 << current->event.getEndTime() << ","
+                << current->event.getEndTime() << ","
                 << current->event.getLocation() << endl;
 
-                //attendess
+        // new code for attendess============================================================= save for file
+        auto &attendees = current->event.getAttendees();
+        for (const auto &attendee : attendees)
+        {
+            outFile << "," << attendee;
+        }
+        outFile << endl;
+        // ends
         current = current->next;
     }
 
@@ -138,9 +146,8 @@ void EventLinkedList::saveEventsToFile( string &filename)
     outFile.close();
 }
 
-
 // Load events from a file into the linked list
-void EventLinkedList::loadEventsFromFile(string& filename)
+void EventLinkedList::loadEventsFromFile(string &filename)
 {
     ifstream inFile(filename);
     if (!inFile)
@@ -162,7 +169,7 @@ void EventLinkedList::loadEventsFromFile(string& filename)
 
         if (tokens.size() != 7)
         {
-            cerr << "Invalid data format in file: " << filename <<endl;
+            cerr << "Invalid data format in file: " << filename << endl;
             continue;
         }
 
@@ -201,7 +208,7 @@ void EventLinkedList::updateEvent(int eventId)
     getline(cin >> ws, date);
     cout << "Enter updated Start Time (HH:MM): ";
     getline(cin >> ws, startT);
-     cout << "Enter updated End Time (HH:MM): ";
+    cout << "Enter updated End Time (HH:MM): ";
     getline(cin >> ws, endT);
     cout << "Enter updated location: ";
     getline(cin >> ws, loc);
@@ -268,8 +275,7 @@ void EventLinkedList::manageAttendees(int eventId)
         default:
             cout << "Invalid choice. Please try again." << endl;
         }
-    }
-    while (choice != '4');
+    } while (choice != '4');
 }
 
 // Manage attendees of an event in the linked list
@@ -329,17 +335,19 @@ void EventLinkedList::manageEvent(int eventId)
         default:
             cout << "Invalid choice. Please try again." << endl;
         }
-    }
-    while (choice != '4');
+    } while (choice != '4');
 }
 
 // Check for schedule conflict with a new event
-bool EventLinkedList::hasScheduleConflict(Event& newEvent) {
-    EventNode* current = head;
-    while (current != nullptr) {
+bool EventLinkedList::hasScheduleConflict(Event &newEvent)
+{
+    EventNode *current = head;
+    while (current != nullptr)
+    {
         // Check for overlap based on date and start time
         if (current->event.getDate() == newEvent.getDate() &&
-            current->event.getStartTime() == newEvent.getStartTime()) {
+            current->event.getStartTime() == newEvent.getStartTime())
+        {
             // cout << "Schedule conflict with the following event:" << endl;
             // current->event.displayEventDetails(); // Assuming displayEventDetails method exists in Event class
             return true;

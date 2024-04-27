@@ -14,13 +14,13 @@ private:
     string date;
     string startTime;
     string endTime;
-//    string time;
+    //    string time;
     string location;
     vector<string> attendees;
 
 public:
-//    Event(int id, string &t, string &desc, string &d, string &tme, string &loc);
-    Event(int id, string &t, string &desc, string &d, string &startT,  string &endT, string &loc);
+    //    Event(int id, string &t, string &desc, string &d, string &tme, string &loc);
+    Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc);
 
     int getEventId();
     string getTitle();
@@ -30,9 +30,9 @@ public:
     string getDate();
     void setDate(string &d);
     string getStartTime();
-    void setStartTime(string& startT);
+    void setStartTime(string &startT);
     string getEndTime();
-    void setEndTime(string& endT);
+    void setEndTime(string &endT);
     string getLocation();
     void setLocation(string &loc);
 
@@ -47,6 +47,9 @@ public:
 
     // Method to check if an attendee is registered for the event
     bool hasAttendee(string &attendee);
+
+    //new code ==================================================== for attendee
+    vector<string> &getAttendees() { return attendees; };
 };
 
 #endif // EVENT_H
