@@ -26,21 +26,23 @@ string Event::getDate()
     return date;
 }
 
-string Event::getStartTime() {
+string Event::getStartTime()
+{
     return startTime;
 }
 
-//void Event::setStartTime(string& startT) {
-//    startTime = startT;
-//}
+// void Event::setStartTime(string& startT) {
+//     startTime = startT;
+// }
 
-string Event::getEndTime(){
+string Event::getEndTime()
+{
     return endTime;
 }
 
-//void Event::setEndTime(string& endT) {
-//    endTime = endT;
-//}
+// void Event::setEndTime(string& endT) {
+//     endTime = endT;
+// }
 
 string Event::getLocation()
 {
@@ -66,23 +68,6 @@ bool Event::isAttendee(string &attendee)
     return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
 }
 
-void Event::displayEventDetails()
-{
-    cout << "Event ID: " << eventId << endl;
-    cout << "Title: " << title << endl;
-    cout << "Description: " << description << endl;
-    cout << "Date: " << date << endl;
-    cout << "Start Time: " << startTime << endl;
-    cout << "End Time: " << endTime << endl;
-    cout << "Location: " << location << endl;
-    cout << "Attendees: ";
-    for (auto &attendee : attendees)
-    {
-        cout << attendee << ", ";
-    }
-    cout << endl;
-}
-
 bool Event::hasAttendee(string &attendee)
 {
     return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
@@ -102,4 +87,22 @@ void Event::displayAttendees()
             cout << "- " << attendee << endl;
         }
     }
+}
+
+void Event::displayEventDetails()
+{
+    cout << "Event ID: " << eventId << endl;
+    cout << "Title: " << title << endl;
+    cout << "Description: " << description << endl;
+    cout << "Date: " << date << endl;
+    cout << "Start Time: " << startTime << endl;
+    cout << "End Time: " << endTime << endl;
+    cout << "Location: " << location << endl;
+    cout << "Attendees: ";
+    for (auto &attendee : attendees)
+    {
+        cout << attendee << ", ";
+    }
+    cout << endl;
+    cout << endl;
 }

@@ -129,6 +129,8 @@ void EventLinkedList::saveEventsToFile( string &filename)
                 << current->event.getStartTime() << ","
                  << current->event.getEndTime() << ","
                 << current->event.getLocation() << endl;
+
+                //attendess
         current = current->next;
     }
 
@@ -169,7 +171,7 @@ void EventLinkedList::loadEventsFromFile(string& filename)
         string desc = tokens[2];
         string date = tokens[3];
         string startT = tokens[4];
-         string endT = tokens[5];
+        string endT = tokens[5];
         string loc = tokens[6];
 
         Event event(id, title, desc, date, startT, endT, loc);

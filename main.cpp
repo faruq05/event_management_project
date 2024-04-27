@@ -32,6 +32,7 @@ int main()
     {
         displayMenu();
         cin >> choice;
+        cout<<endl;
         cin.ignore(); // Ignore any remaining newline characters in the input buffer
 
         switch (choice)
