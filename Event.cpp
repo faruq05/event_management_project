@@ -41,7 +41,7 @@ string Event::getEndTime()
 }
 
 //new code ============================================ getter for attendee
-vector<string> &Event::getAttendees()
+vector<string>& Event::getAttendees()
 {
     return attendees;
 }

@@ -49,7 +49,7 @@ public:
     bool hasAttendee(string &attendee);
 
     //new code ==================================================== for attendee
-    vector<string> &getAttendees() { return attendees; };
+    vector<string>& getAttendees();
 };
 
 #endif // EVENT_H
