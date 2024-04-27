@@ -168,7 +168,7 @@ void EventLinkedList::loadEventsFromFile(string &filename)
 
         if (tokens.size() != 7)
         {
-            cerr << "Invalid data format in file: " << filename << endl;
+            // cerr << "Invalid data format in file: " << filename << endl;
             continue;
         }
 
@@ -188,6 +188,35 @@ void EventLinkedList::loadEventsFromFile(string &filename)
     inFile.close();
 }
 // Update details of an event in the linked list
+// void EventLinkedList::updateEvent(int eventId)
+// {
+//     EventNode *eventNode = findEventById(eventId);
+//     if (eventNode == nullptr)
+//     {
+//         cout << "Event with ID " << eventId << " not found." << endl;
+//         return;
+//     }
+
+//     // Prompt user for updated details
+//     string title, desc, date, startT, endT, loc;
+//     cout << "Enter updated title: ";
+//     getline(cin >> ws, title);
+//     cout << "Enter updated description: ";
+//     getline(cin >> ws, desc);
+//     cout << "Enter updated date (MM/DD/YYYY): ";
+//     getline(cin >> ws, date);
+//     cout << "Enter updated Start Time (HH:MM): ";
+//     getline(cin >> ws, startT);
+//     cout << "Enter updated End Time (HH:MM): ";
+//     getline(cin >> ws, endT);
+//     cout << "Enter updated location: ";
+//     getline(cin >> ws, loc);
+
+//     // Update event details
+//     eventNode->event = Event(eventId, title, desc, date, startT, endT, loc);
+//     cout << "Event with ID " << eventId << " updated successfully." << endl;
+// }
+
 void EventLinkedList::updateEvent(int eventId)
 {
     EventNode *eventNode = findEventById(eventId);
@@ -197,24 +226,96 @@ void EventLinkedList::updateEvent(int eventId)
         return;
     }
 
-    // Prompt user for updated details
-    string title, desc, date, startT, endT, loc;
-    cout << "Enter updated title: ";
-    getline(cin >> ws, title);
-    cout << "Enter updated description: ";
-    getline(cin >> ws, desc);
-    cout << "Enter updated date (MM/DD/YYYY): ";
-    getline(cin >> ws, date);
-    cout << "Enter updated Start Time (HH:MM): ";
-    getline(cin >> ws, startT);
-    cout << "Enter updated End Time (HH:MM): ";
-    getline(cin >> ws, endT);
-    cout << "Enter updated location: ";
-    getline(cin >> ws, loc);
+    Event &event = eventNode->event;
+    string choice;
+    bool updateMade = false;
 
-    // Update event details
-    eventNode->event = Event(eventId, title, desc, date, startT, endT, loc);
-    cout << "Event with ID " << eventId << " updated successfully." << endl;
+    do
+    {   
+        cout<<endl;
+        cout << "Which detail would you like to update for '" << event.getTitle() << "' ?" << endl;
+        cout<<"========================================================================"<<endl;
+        cout << "1. Update the Title" << endl;
+        cout << "2. Update the Description" << endl;
+        cout << "3. Update the Date" << endl;
+        cout << "4. Update the Start Time" << endl;
+        cout << "5. Update the End Time" << endl;
+        cout << "6. Update the Location" << endl;
+        cout << "7. Update the Attendees " << endl;
+        cout << "0. Done Updating" << endl;
+        cout << "Enter your choice: ";
+        getline(cin >> ws, choice);
+
+        if (choice == "1")
+        {
+            string newTitle;
+            cout << "Enter new title: ";
+            getline(cin >> ws, newTitle);
+            event.setTitle(newTitle);
+            updateMade = true;
+        }
+        else if (choice == "2")
+        {
+            string newDescription;
+            cout << "Enter new description: ";
+            getline(cin >> ws, newDescription);
+            event.setDescription(newDescription);
+            updateMade = true;
+        }
+        else if (choice == "3")
+        {
+            string newDate;
+            cout << "Enter new date (MM/DD/YYYY): ";
+            getline(cin >> ws, newDate);
+            event.setDate(newDate);
+            updateMade = true;
+        }
+        else if (choice == "4")
+        {
+            string newStartTime;
+            cout << "Enter new start time (HH:MM): ";
+            getline(cin >> ws, newStartTime);
+            event.setStartTime(newStartTime);
+            updateMade = true;
+        }
+        else if (choice == "5")
+        {
+            string newEndTime;
+            cout << "Enter new end time (HH:MM): ";
+            getline(cin >> ws, newEndTime);
+            event.setEndTime(newEndTime);
+            updateMade = true;
+        }
+        else if (choice == "6")
+        {
+            string newLocation;
+            cout << "Enter new location: ";
+            getline(cin >> ws, newLocation);
+            event.setLocation(newLocation);
+            updateMade = true;
+        }
+        else if (choice == "7")
+        {
+            cout << "Attendee management not implemented yet." << endl;
+        }
+        else if (choice == "0")
+        {
+            break;
+        }
+        else
+        {
+            cout << "Invalid choice. Please try again." << endl;
+        }
+    } while (choice != "0");
+
+    if (updateMade)
+    {
+        cout << "Event with ID " << eventId << " updated successfully." << endl;
+    }
+    else
+    {
+        cout << "No changes made to Event ID " << eventId << "." << endl;
+    }
 }
 
 // Implementation of manageAttendees method

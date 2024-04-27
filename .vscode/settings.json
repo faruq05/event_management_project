@@ -60,6 +60,7 @@
     "*.embeddedhtml": "html",
     "iostream": "cpp",
     "new": "cpp",
-    "ostream": "cpp"
+    "ostream": "cpp",
+    "fstream": "cpp"
   }
 }

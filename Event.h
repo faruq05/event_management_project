@@ -14,7 +14,6 @@ private:
     string date;
     string startTime;
     string endTime;
-    //    string time;
     string location;
     vector<string> attendees;
 

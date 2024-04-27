@@ -6,6 +6,7 @@ using namespace std;
 Event::Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc)
     : eventId(id), title(t), description(desc), date(d), startTime(startT), endTime(endT), location(loc) {}
 
+//getter
 int Event::getEventId()
 {
     return eventId;
@@ -31,13 +32,14 @@ string Event::getStartTime()
     return startTime;
 }
 
-// void Event::setStartTime(string& startT) {
-//     startTime = startT;
-// }
-
 string Event::getEndTime()
 {
     return endTime;
+}
+
+string Event::getLocation()
+{
+    return location;
 }
 
 //new code ============================================ getter for attendee
@@ -46,14 +48,31 @@ vector<string>& Event::getAttendees()
     return attendees;
 }
 
-// void Event::setEndTime(string& endT) {
-//     endTime = endT;
-// }
-
-string Event::getLocation()
-{
-    return location;
+//setter
+void Event::setTitle(string &t) {
+    title = t;
 }
+
+void Event::setDescription(string &desc) {
+    description = desc;
+}
+
+void Event::setDate(string &d) {
+    date = d;
+}
+
+void Event::setStartTime(string &startT) {
+    startTime = startT;
+}
+
+void Event::setEndTime(string &endT) {
+    endTime = endT;
+}
+
+void Event::setLocation(string &loc) {
+    location = loc;
+}
+
 
 void Event::addAttendee(string &attendee)
 {

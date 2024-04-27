@@ -83,6 +83,7 @@ int main()
             int id;
             cout << "Enter event ID to delete: ";
             cin >> id;
+            cout<<endl;
             eventList.deleteEvent(id);
             break;
         }
