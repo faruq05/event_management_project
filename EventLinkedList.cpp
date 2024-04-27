@@ -310,11 +310,11 @@ void EventLinkedList::updateEvent(int eventId)
 
     if (updateMade)
     {
-        cout << "Event with ID " << eventId << " updated successfully." << endl;
+        cout << "Event updated successfully" << endl;
     }
     else
     {
-        cout << "No changes made to Event ID " << eventId << "." << endl;
+        cout << "No changes made" << endl;
     }
 }
 
@@ -446,7 +446,8 @@ bool EventLinkedList::hasScheduleConflict(Event &newEvent)
     {
         // Check for overlap based on date and start time
         if (current->event.getDate() == newEvent.getDate() &&
-            current->event.getStartTime() == newEvent.getStartTime())
+            current->event.getStartTime() == newEvent.getStartTime() &&
+             current->event.getLocation() == newEvent.getLocation()) 
         {
             // cout << "Schedule conflict with the following event:" << endl;
             // current->event.displayEventDetails(); // Assuming displayEventDetails method exists in Event class

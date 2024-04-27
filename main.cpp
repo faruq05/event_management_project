@@ -45,26 +45,30 @@ int main()
             cin >> id;
             cin.ignore(); // Ignore newline character after reading integer input
             cout << "Enter event title: ";
-            getline(cin, title);
+            getline(cin >> ws, title);
             cout << "Enter event description: ";
-            getline(cin, desc);
+            getline(cin >> ws, desc);
             cout << "Enter event date (MM/DD/YYYY): ";
-            getline(cin, date);
+            getline(cin >> ws, date);
             cout << "Enter event Start time (HH:MM): ";
-            getline(cin, startT);
+            getline(cin >> ws, startT);
             cout << "Enter event End time (HH:MM): ";
-            getline(cin, endT);
+            getline(cin >> ws, endT);
             cout << "Enter event location: ";
-            getline(cin, loc);
+            getline(cin >> ws, loc);
 
+            // Create a new Event object
             Event newEvent(id, title, desc, date, startT, endT, loc);
-            eventList.insertEvent(newEvent);
+
+            // Check for schedule conflict
             if (eventList.hasScheduleConflict(newEvent))
-            {
-                cout << "Schedule conflict with the following event" << endl;
-            }
+                {
+                 // Display conflict message
+                cout << "Schedule conflict with the following event: " << newEvent.getTitle() << endl;
+                }
             else
-            {
+                {
+                // Insert the event only if there is no conflict
                 eventList.insertEvent(newEvent);
                 cout << "Event created successfully." << endl;
             }
