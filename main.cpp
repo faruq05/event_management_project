@@ -32,7 +32,7 @@ int main()
     {
         displayMenu();
         cin >> choice;
-        cout<<endl;
+        cout << endl;
         cin.ignore(); // Ignore any remaining newline characters in the input buffer
 
         switch (choice)
@@ -61,7 +61,7 @@ int main()
             eventList.insertEvent(newEvent);
             if (eventList.hasScheduleConflict(newEvent))
             {
-                cout << "Schedule conflict with the following event"<<endl;
+                cout << "Schedule conflict with the following event" << endl;
             }
             else
             {
@@ -112,9 +112,19 @@ int main()
         case '7':
         {
             string filename;
-            cout << "Enter filename to save events: ";
-            cin >> filename;
-            eventList.saveEventsToFile(filename);
+            ifstream file_check("events.txt"); // Check if the file exists
+            if (file_check.good())
+            {
+                filename = "events.txt"; // Use the default filename if it exists
+                eventList.saveEventsToFile(filename);
+                cout << "Events saved to " << filename << " successfully." << endl;
+            }
+            else
+            {
+                cout << "Enter filename to save events: ";
+                cin >> filename;
+                eventList.saveEventsToFile(filename);
+            }
             break;
         }
         // case '8':

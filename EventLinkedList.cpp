@@ -142,7 +142,6 @@ void EventLinkedList::saveEventsToFile(string &filename)
         current = current->next;
     }
 
-    cout << "Events saved to " << filename << " successfully." << endl;
     outFile.close();
 }
 
