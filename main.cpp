@@ -107,7 +107,7 @@ int main()
             int id;
             cout << "Enter event ID to manage attendees: ";
             cin >> id;
-            eventList.manageAttendees(id); 
+            eventList.manageAttendees(id);
             break;
         }
         case '7':
