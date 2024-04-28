@@ -33,7 +33,7 @@ int main()
         displayMenu();
         cin >> choice;
         cout << endl;
-        cin.ignore(); // Ignore any remaining newline characters in the input buffer
+        cin.ignore();
 
         switch (choice)
         {
@@ -43,7 +43,7 @@ int main()
             string title, desc, date, startT, endT, loc;
             cout << "Enter event ID: ";
             cin >> id;
-            cin.ignore(); // Ignore newline character after reading integer input
+            cin.ignore();
             cout << "Enter event title: ";
             getline(cin >> ws, title);
             cout << "Enter event description: ";
@@ -56,19 +56,15 @@ int main()
             getline(cin >> ws, endT);
             cout << "Enter event location: ";
             getline(cin >> ws, loc);
-
-            // Create a new Event object
             Event newEvent(id, title, desc, date, startT, endT, loc);
 
             // Check for schedule conflict
             if (eventList.hasScheduleConflict(newEvent))
-                {
-                 // Display conflict message
+            {
                 cout << "Schedule conflict with the following event: " << newEvent.getTitle() << endl;
-                }
+            }
             else
-                {
-                // Insert the event only if there is no conflict
+            {
                 eventList.insertEvent(newEvent);
                 cout << "Event created successfully." << endl;
             }
@@ -79,7 +75,7 @@ int main()
             int id;
             cout << "Enter event ID to update: ";
             cin >> id;
-            eventList.updateEvent(id); // Call updateEvent method
+            eventList.updateEvent(id);
             break;
         }
         case '3':
@@ -87,7 +83,7 @@ int main()
             int id;
             cout << "Enter event ID to delete: ";
             cin >> id;
-            cout<<endl;
+            cout << endl;
             eventList.deleteEvent(id);
             break;
         }
@@ -101,7 +97,7 @@ int main()
         {
             string title;
             cout << "Enter event title to search: ";
-
+            cout << endl;
             getline(cin, title);
             eventList.searchEventByTitle(title);
             break;
@@ -111,7 +107,7 @@ int main()
             int id;
             cout << "Enter event ID to manage attendees: ";
             cin >> id;
-            eventList.manageAttendees(id); // Call manageAttendees method
+            eventList.manageAttendees(id); 
             break;
         }
         case '7':

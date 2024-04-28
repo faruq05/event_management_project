@@ -17,7 +17,7 @@ private:
     EventNode *head;
 
 public:
-    EventLinkedList();  // ructor
+    EventLinkedList();  // Constructor
     ~EventLinkedList(); // Destructor
 
     void insertEvent(Event &e);
@@ -28,7 +28,7 @@ public:
     void saveEventsToFile(string &filename);
     void loadEventsFromFile(string &filename);
 
-    // New method declarations
+    // Update methods
     void updateEvent(int eventId);
     void manageAttendees(int eventId);
     void manageEvent(int eventId);

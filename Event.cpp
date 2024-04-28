@@ -3,10 +3,20 @@
 #include <algorithm>
 using namespace std;
 
+// Event::Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc)
+//     : eventId(id), title(t), description(desc), date(d), startTime(startT), endTime(endT), location(loc) {}
 Event::Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc)
-    : eventId(id), title(t), description(desc), date(d), startTime(startT), endTime(endT), location(loc) {}
+{
+    this->eventId = id;
+    this->title = t;
+    this->description = desc;
+    this->date = d;
+    this->startTime = startT;
+    this->endTime = endT;
+    this->location = loc;
+}
 
-//getter
+// getter
 int Event::getEventId()
 {
     return eventId;
@@ -42,43 +52,49 @@ string Event::getLocation()
     return location;
 }
 
-//new code ============================================ getter for attendee
-vector<string>& Event::getAttendees()
+// new code ============================================ getter for attendee
+vector<string> &Event::getAttendees()
 {
     return attendees;
 }
 
-//setter
-void Event::setTitle(string &t) {
+// setters
+void Event::setTitle(string &t)
+{
     title = t;
 }
 
-void Event::setDescription(string &desc) {
+void Event::setDescription(string &desc)
+{
     description = desc;
 }
 
-void Event::setDate(string &d) {
+void Event::setDate(string &d)
+{
     date = d;
 }
 
-void Event::setStartTime(string &startT) {
+void Event::setStartTime(string &startT)
+{
     startTime = startT;
 }
 
-void Event::setEndTime(string &endT) {
+void Event::setEndTime(string &endT)
+{
     endTime = endT;
 }
 
-void Event::setLocation(string &loc) {
+void Event::setLocation(string &loc)
+{
     location = loc;
 }
-
 
 void Event::addAttendee(string &attendee)
 {
     attendees.push_back(attendee);
 }
 
+// remove an attendee
 void Event::removeAttendee(string &attendee)
 {
     auto it = find(attendees.begin(), attendees.end(), attendee);
@@ -88,16 +104,19 @@ void Event::removeAttendee(string &attendee)
     }
 }
 
-bool Event::isAttendee(string &attendee)
-{
-    return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
-}
+// is attendee
+//  bool Event::isAttendee(string &attendee)
+//  {
+//      return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
+//  }
 
+// has attendee (Search attendee from an event)
 bool Event::hasAttendee(string &attendee)
 {
     return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
 }
 
+// display attendee (Shows all attendee for an event)
 void Event::displayAttendees()
 {
     if (attendees.empty())
@@ -114,6 +133,7 @@ void Event::displayAttendees()
     }
 }
 
+// display event details
 void Event::displayEventDetails()
 {
     cout << "Event ID: " << eventId << endl;

@@ -4,7 +4,7 @@
 #include <sstream>
 using namespace std;
 
-// ructor
+// constructor
 EventLinkedList::EventLinkedList() : head(nullptr) {}
 
 // Destructor
