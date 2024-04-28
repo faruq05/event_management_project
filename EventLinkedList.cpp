@@ -110,83 +110,7 @@ void EventLinkedList::searchEventByTitle(string &title)
     }
 }
 
-// Save all events in the linked list to a file
-void EventLinkedList::saveEventsToFile(string &filename)
-{
-    ofstream outFile(filename);
-    if (!outFile)
-    {
-        cerr << "Unable to open file: " << filename << endl;
-        return;
-    }
 
-    EventNode *current = head;
-    while (current != nullptr)
-    {
-        outFile << current->event.getEventId() << ","
-                << current->event.getTitle() << ","
-                << current->event.getDescription() << ","
-                << current->event.getDate() << ","
-                << current->event.getStartTime() << ","
-                << current->event.getEndTime() << ","
-                << current->event.getLocation() << endl;
-
-        // new code for attendess============================================================= save for file
-        auto &attendees = current->event.getAttendees();
-        for (const auto &attendee : attendees)
-        {
-            outFile << "," << attendee;
-        }
-        outFile << endl;
-        // ends
-        current = current->next;
-    }
-
-    outFile.close();
-}
-
-// Load events from a file into the linked list
-void EventLinkedList::loadEventsFromFile(string &filename)
-{
-    ifstream inFile(filename);
-    if (!inFile)
-    {
-        cerr << "Unable to open file: " << filename << endl;
-        return;
-    }
-
-    string line;
-    while (getline(inFile, line))
-    {
-        stringstream ss(line);
-        string token;
-        vector<string> tokens;
-        while (getline(ss, token, ','))
-        {
-            tokens.push_back(token);
-        }
-
-        if (tokens.size() != 7)
-        {
-            // cerr << "Invalid data format in file: " << filename << endl;
-            continue;
-        }
-
-        int id = stoi(tokens[0]);
-        string title = tokens[1];
-        string desc = tokens[2];
-        string date = tokens[3];
-        string startT = tokens[4];
-        string endT = tokens[5];
-        string loc = tokens[6];
-
-        Event event(id, title, desc, date, startT, endT, loc);
-        insertEvent(event);
-    }
-
-    cout << "Events loaded from " << filename << " successfully." << endl;
-    inFile.close();
-}
 // Update details of an event in the linked list
 // void EventLinkedList::updateEvent(int eventId)
 // {
@@ -456,4 +380,82 @@ bool EventLinkedList::hasScheduleConflict(Event &newEvent)
         current = current->next;
     }
     return false;
+}
+
+// Save all events in the linked list to a file
+void EventLinkedList::saveEventsToFile(string &filename)
+{
+    ofstream outFile(filename);
+    if (!outFile)
+    {
+        cerr << "Unable to open file: " << filename << endl;
+        return;
+    }
+
+    EventNode *current = head;
+    while (current != nullptr)
+    {
+        outFile << current->event.getEventId() << ","
+                << current->event.getTitle() << ","
+                << current->event.getDescription() << ","
+                << current->event.getDate() << ","
+                << current->event.getStartTime() << ","
+                << current->event.getEndTime() << ","
+                << current->event.getLocation() << endl;
+
+        // new code for attendess============================================================= save for file
+        auto &attendees = current->event.getAttendees();
+        for (const auto &attendee : attendees)
+        {
+            outFile << "," << attendee;
+        }
+        outFile << endl;
+        // ends
+        current = current->next;
+    }
+
+    outFile.close();
+}
+
+// Load events from a file into the linked list
+void EventLinkedList::loadEventsFromFile(string &filename)
+{
+    ifstream inFile(filename);
+    if (!inFile)
+    {
+        cerr << "Unable to open file: " << filename << endl;
+        return;
+    }
+
+    string line;
+    while (getline(inFile, line))
+    {
+        stringstream ss(line);
+        string token;
+        vector<string> tokens;
+        while (getline(ss, token, ','))
+        {
+            tokens.push_back(token);
+        }
+
+        if (tokens.size() != 7)
+        {
+            // cerr << "Invalid data format in file: " << filename << endl;
+            continue;
+        }
+
+        int id = stoi(tokens[0]);
+        string title = tokens[1];
+        string desc = tokens[2];
+        string date = tokens[3];
+        string startT = tokens[4];
+        string endT = tokens[5];
+        string loc = tokens[6];
+
+        Event event(id, title, desc, date, startT, endT, loc);
+        insertEvent(event);
+    }
+
+    cout << "Events loaded from " << filename << " successfully." << endl;
+    inFile.close();
 }

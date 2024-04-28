@@ -144,10 +144,19 @@ void Event::displayEventDetails()
     cout << "End Time: " << endTime << endl;
     cout << "Location: " << location << endl;
     cout << "Attendees: ";
-    for (auto &attendee : attendees)
+    if (!attendees.empty())
     {
-        cout << attendee << ", ";
+        cout << "Attendees: ";
+        for (auto &attendee : attendees)
+        {
+            cout << attendee << ", ";
+        }
+        cout << endl;
     }
-    cout << endl;
+    else
+    {
+        cout << "No attendees has been added for this event." << endl;
+    }
+
     cout << endl;
 }
