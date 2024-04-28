@@ -4,11 +4,17 @@
 #include "EventLinkedList.h"
 #include "Event.cpp"
 #include "EventLinkedList.cpp"
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define CYAN    "\033[36m"
 using namespace std;
 
 void displayMenu()
 {
-    cout << "\n======= Campus Event Management System =======" << endl;
+    cout << YELLOW <<"\n======= Campus Event Management System =======" << endl;
     cout << "1. Create Event" << endl;
     cout << "2. Update Event" << endl;
     cout << "3. Delete Event" << endl;
@@ -18,12 +24,12 @@ void displayMenu()
     cout << "7. Save Events to File" << endl;
     // cout << "8. Load Events from File" << endl;
     cout << "8. Exit" << endl;
-    cout << "=============================================" << endl;
-    cout << "Enter your choice: ";
+    cout << "=============================================" << RESET << endl;
+    cout << BLUE << "Enter your choice: "<< RESET;
 }
 
 int main()
-{
+{   
     EventLinkedList eventList; // Create an instance of EventLinkedList
     string filename = "events.txt";
     eventList.loadEventsFromFile(filename);
@@ -41,7 +47,7 @@ int main()
         {
             int id;
             string title, desc, date, startT, endT, loc;
-            cout << "Enter event ID: ";
+            cout << BLUE << "Enter event ID: " << RESET;
             cin >> id;
             cin.ignore();
             cout << "Enter event title: ";
@@ -66,14 +72,14 @@ int main()
             else
             {
                 eventList.insertEvent(newEvent);
-                cout << "Event created successfully." << endl;
+                cout << GREEN << "Event created successfully." << RESET << endl;
             }
             break;
         }
         case '2':
         {
             int id;
-            cout << "Enter event ID to update: ";
+            cout << BLUE << "Enter event ID to update: " << RESET;
             cin >> id;
             eventList.updateEvent(id);
             break;
@@ -81,7 +87,7 @@ int main()
         case '3':
         {
             int id;
-            cout << "Enter event ID to delete: ";
+            cout << BLUE << "Enter event ID to delete: " << RESET;
             cin >> id;
             cout << endl;
             eventList.deleteEvent(id);
@@ -96,7 +102,7 @@ int main()
         case '5':
         {
             string title;
-            cout << "Enter event title to search: ";
+            cout << BLUE << "Enter event title to search: " << RESET;
             cout << endl;
             getline(cin, title);
             eventList.searchEventByTitle(title);
@@ -105,7 +111,7 @@ int main()
         case '6':
         {
             int id;
-            cout << "Enter event ID to manage attendees: ";
+            cout << BLUE << "Enter event ID to manage attendees: " << RESET;
             cin >> id;
             eventList.manageAttendees(id);
             break;
@@ -118,11 +124,11 @@ int main()
             {
                 filename = "events.txt"; // Use the default filename if it exists
                 eventList.saveEventsToFile(filename);
-                cout << "Events saved to " << filename << " successfully." << endl;
+                cout << GREEN << "Events saved to " << filename << " successfully." << RESET << endl;
             }
             else
             {
-                cout << "Enter filename to save events: ";
+                cout << BLUE << "Enter filename to save events: " << RESET;
                 cin >> filename;
                 eventList.saveEventsToFile(filename);
             }
@@ -137,10 +143,10 @@ int main()
         //     break;
         // }
         case '8':
-            cout << "Exiting Campus Event Management System." << endl;
+            cout << YELLOW << "Exiting Campus Event Management System." << RESET << endl;
             break;
         default:
-            cout << "Invalid choice. Please try again." << endl;
+            cout << RED << "Invalid choice. Please try again." << RESET << endl;
         }
     } while (choice != '8');
 

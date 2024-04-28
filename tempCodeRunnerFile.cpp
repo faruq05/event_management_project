@@ -1,1 +1,2 @@
-std
+
+int main()

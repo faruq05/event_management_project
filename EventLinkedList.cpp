@@ -2,6 +2,12 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#define RESET   "\033[0m"
+#define RED     "\033[31m"
+#define GREEN   "\033[32m"
+#define YELLOW  "\033[33m"
+#define BLUE    "\033[34m"
+#define CYAN    "\033[36m"
 using namespace std;
 
 // constructor
@@ -46,7 +52,7 @@ void EventLinkedList::deleteEvent(int eventId)
 
     if (current == nullptr)
     {
-        cout << "Event with ID " << eventId << " not found." << endl;
+        cout << GREEN << "Event with ID " << eventId << " not found." << RESET << endl;
         return;
     }
 
@@ -60,7 +66,7 @@ void EventLinkedList::deleteEvent(int eventId)
     }
 
     delete current;
-    cout << "Event with ID " << eventId << " deleted successfully." << endl;
+    cout <<GREEN << "Event with ID " << eventId << " deleted successfully." << RESET << endl;
 }
 
 // Find an event in the linked list by event ID
@@ -97,7 +103,8 @@ void EventLinkedList::searchEventByTitle(string &title)
     while (current != nullptr)
     {
         if (current->event.getTitle() == title)
-        {
+        {   
+            cout<<"-----------------------------"<<endl;
             current->event.displayEventDetails();
             found = true;
             break;
@@ -106,7 +113,7 @@ void EventLinkedList::searchEventByTitle(string &title)
     }
     if (!found)
     {
-        cout << "Event with title '" << title << "' not found." << endl;
+        cout << RED << "Event with title '" << title << "' not found."<< RESET << endl;
     }
 }
 
@@ -156,9 +163,9 @@ void EventLinkedList::updateEvent(int eventId)
     do
     {
         cout << endl;
-        cout << "Which detail would you like to update for '" << event.getTitle() << "' ?" << endl;
-        cout << "========================================================================" << endl;
-        cout << "1. Update the Title" << endl;
+        cout << BLUE << "Which detail would you like to update for '" << event.getTitle() << "' ?" << endl;
+        cout << "=========================================="<< RESET << endl;
+        cout << CYAN << "1. Update the Title" << endl;
         cout << "2. Update the Description" << endl;
         cout << "3. Update the Date" << endl;
         cout << "4. Update the Start Time" << endl;
@@ -166,7 +173,7 @@ void EventLinkedList::updateEvent(int eventId)
         cout << "6. Update the Location" << endl;
         cout << "7. Update the Attendees " << endl;
         cout << "0. Done Updating" << endl;
-        cout << "Enter your choice: ";
+        cout << "Enter your choice: " << RESET;
         getline(cin >> ws, choice);
 
         if (choice == "1")
@@ -233,11 +240,11 @@ void EventLinkedList::updateEvent(int eventId)
 
     if (updateMade)
     {
-        cout << "Event updated successfully" << endl;
+        cout<< GREEN << "Event updated successfully" << RESET << endl;
     }
     else
     {
-        cout << "No changes made" << endl;
+        cout << RED << "No changes made" << RESET << endl;
     }
 }
 
@@ -262,11 +269,11 @@ void EventLinkedList::manageAttendees(int eventId)
         cout << "Time: " << eventNode->event.getEndTime() << endl;
         cout << "Location: " << eventNode->event.getLocation() << endl;
 
-        cout << "\n1. Add attendee" << endl;
+        cout << CYAN << "\n1. Add attendee" << endl;
         cout << "2. Remove attendee" << endl;
         cout << "3. Display attendees" << endl;
-        cout << "4. Exit" << endl;
-        cout << "Enter your choice: ";
+        cout << "4. Exit" << RESET << endl;
+        cout << BLUE << "Enter your choice: " <<endl;
         cin >> choice;
 
         switch (choice)
@@ -274,95 +281,95 @@ void EventLinkedList::manageAttendees(int eventId)
         case '1':
         {
             string attendeeName;
-            cout << "Enter attendee names to add (enter 's' to stop): ";
+            cout << CYAN << "Enter attendee names to add (enter 's' to stop): " << RESET;
             while (cin >> attendeeName && attendeeName != "s")
             {
                 eventNode->event.addAttendee(attendeeName);
-                cout << attendeeName << " added to attendees." << endl;
-                cout << "Enter next attendee (or 's' to stop): ";
+                cout << GREEN << attendeeName << " added to attendees." << RESET << endl;
+                cout << CYAN << "Enter next attendee (or 's' to stop): " << RESET;
             }
             break;
         }
         case '2':
         {
             string attendeeName;
-            cout << "Enter attendee name to remove: ";
+            cout << CYAN << "Enter attendee name to remove: " << RESET;
             cin >> attendeeName;
             eventNode->event.removeAttendee(attendeeName);
-            cout << attendeeName << " removed from attendees." << endl;
+            cout << GREEN << attendeeName << " removed from attendees." << RESET << endl;
             break;
         }
         case '3':
             eventNode->event.displayAttendees(); // Display attendees of the event
             break;
         case '4':
-            cout << "Exiting attendee management." << endl;
+            cout << GREEN << "Exiting attendee management." << RESET << endl;
             break;
         default:
-            cout << "Invalid choice. Please try again." << endl;
+            cout << RED << "Invalid choice. Please try again."<< RESET << endl;
         }
     } while (choice != '4');
 }
 
 // Manage attendees of an event in the linked list
-void EventLinkedList::manageEvent(int eventId)
-{
-    EventNode *eventNode = findEventById(eventId);
-    if (eventNode == nullptr)
-    {
-        cout << "Event with ID " << eventId << " not found." << endl;
-        return;
-    }
+// void EventLinkedList::manageEvent(int eventId)
+// {
+//     EventNode *eventNode = findEventById(eventId);
+//     if (eventNode == nullptr)
+//     {
+//         cout << RED << "Event with ID " << eventId << " not found." << RESET << endl;
+//         return;
+//     }
 
-    char choice;
-    do
-    {
-        cout << "\nEvent ID: " << eventId << endl;
-        cout << "Title: " << eventNode->event.getTitle() << endl;
-        cout << "Description: " << eventNode->event.getDescription() << endl;
-        cout << "Date: " << eventNode->event.getDate() << endl;
-        cout << "Time: " << eventNode->event.getStartTime() << endl;
-        cout << "Time: " << eventNode->event.getEndTime() << endl;
-        cout << "Location: " << eventNode->event.getLocation() << endl;
+//     char choice;
+//     do
+//     {
+//         cout << "\nEvent ID: " << eventId << endl;
+//         cout << "Title: " << eventNode->event.getTitle() << endl;
+//         cout << "Description: " << eventNode->event.getDescription() << endl;
+//         cout << "Date: " << eventNode->event.getDate() << endl;
+//         cout << "Time: " << eventNode->event.getStartTime() << endl;
+//         cout << "Time: " << eventNode->event.getEndTime() << endl;
+//         cout << "Location: " << eventNode->event.getLocation() << endl;
 
-        cout << "\n1. Add attendee" << endl;
-        cout << "2. Remove attendee" << endl;
-        cout << "3. Display attendees" << endl;
-        cout << "4. Exit" << endl;
-        cout << "Enter your choice: ";
-        cin >> choice;
+//         cout << "\n1. Add attendee" << endl;
+//         cout << "2. Remove attendee" << endl;
+//         cout << "3. Display attendees" << endl;
+//         cout << "4. Exit" << endl;
+//         cout << "Enter your choice: ";
+//         cin >> choice;
 
-        switch (choice)
-        {
-        case '1':
-        {
-            string attendeeName;
-            cout << "Enter attendee name to add: ";
-            cin >> attendeeName;
-            eventNode->event.addAttendee(attendeeName);
-            cout << attendeeName << " added to attendees." << endl;
-            break;
-        }
-        case '2':
-        {
-            string attendeeName;
-            cout << "Enter attendee name to remove: ";
-            cin >> attendeeName;
-            eventNode->event.removeAttendee(attendeeName);
-            cout << attendeeName << " removed from attendees." << endl;
-            break;
-        }
-        case '3':
-            eventNode->event.displayEventDetails(); // Display event details including attendees
-            break;
-        case '4':
-            cout << "Exiting event management." << endl;
-            break;
-        default:
-            cout << "Invalid choice. Please try again." << endl;
-        }
-    } while (choice != '4');
-}
+//         switch (choice)
+//         {
+//         case '1':
+//         {
+//             string attendeeName;
+//             cout << "Enter attendee name to add: ";
+//             cin >> attendeeName;
+//             eventNode->event.addAttendee(attendeeName);
+//             cout << attendeeName << " added to attendees." << endl;
+//             break;
+//         }
+//         case '2':
+//         {
+//             string attendeeName;
+//             cout << "Enter attendee name to remove: ";
+//             cin >> attendeeName;
+//             eventNode->event.removeAttendee(attendeeName);
+//             cout << attendeeName << " removed from attendees." << endl;
+//             break;
+//         }
+//         case '3':
+//             eventNode->event.displayEventDetails(); // Display event details including attendees
+//             break;
+//         case '4':
+//             cout << "Exiting event management." << endl;
+//             break;
+//         default:
+//             cout << "Invalid choice. Please try again." << endl;
+//         }
+//     } while (choice != '4');
+// }
 
 // Check for schedule conflict with a new event
 bool EventLinkedList::hasScheduleConflict(Event &newEvent)
@@ -423,7 +430,7 @@ void EventLinkedList::loadEventsFromFile(string &filename)
     ifstream inFile(filename);
     if (!inFile)
     {
-        cerr << "Unable to open file: " << filename << endl;
+        cerr << RED << "Unable to open file: " << filename << RESET << endl;
         return;
     }
 
@@ -466,6 +473,6 @@ void EventLinkedList::loadEventsFromFile(string &filename)
         insertEvent(event);
     }
 
-    cout << "Events loaded from " << filename << " successfully." << endl;
+    cout << GREEN << "Events loaded from " << filename << " successfully." << RESET << endl;
     inFile.close();
 }
