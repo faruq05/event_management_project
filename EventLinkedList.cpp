@@ -110,7 +110,6 @@ void EventLinkedList::searchEventByTitle(string &title)
     }
 }
 
-
 // Update details of an event in the linked list
 // void EventLinkedList::updateEvent(int eventId)
 // {
@@ -155,10 +154,10 @@ void EventLinkedList::updateEvent(int eventId)
     bool updateMade = false;
 
     do
-    {   
-        cout<<endl;
+    {
+        cout << endl;
         cout << "Which detail would you like to update for '" << event.getTitle() << "' ?" << endl;
-        cout<<"========================================================================"<<endl;
+        cout << "========================================================================" << endl;
         cout << "1. Update the Title" << endl;
         cout << "2. Update the Description" << endl;
         cout << "3. Update the Date" << endl;
@@ -275,10 +274,13 @@ void EventLinkedList::manageAttendees(int eventId)
         case '1':
         {
             string attendeeName;
-            cout << "Enter attendee name to add: ";
-            cin >> attendeeName;
-            eventNode->event.addAttendee(attendeeName);
-            cout << attendeeName << " added to attendees." << endl;
+            cout << "Enter attendee names to add (enter 's' to stop): ";
+            while (cin >> attendeeName && attendeeName != "s")
+            {
+                eventNode->event.addAttendee(attendeeName);
+                cout << attendeeName << " added to attendees." << endl;
+                cout << "Enter next attendee (or 's' to stop): ";
+            }
             break;
         }
         case '2':
@@ -371,10 +373,8 @@ bool EventLinkedList::hasScheduleConflict(Event &newEvent)
         // Check for overlap based on date and start time
         if (current->event.getDate() == newEvent.getDate() &&
             current->event.getStartTime() == newEvent.getStartTime() &&
-             current->event.getLocation() == newEvent.getLocation()) 
+            current->event.getLocation() == newEvent.getLocation())
         {
-            // cout << "Schedule conflict with the following event:" << endl;
-            // current->event.displayEventDetails(); // Assuming displayEventDetails method exists in Event class
             return true;
         }
         current = current->next;
@@ -401,9 +401,9 @@ void EventLinkedList::saveEventsToFile(string &filename)
                 << current->event.getDate() << ","
                 << current->event.getStartTime() << ","
                 << current->event.getEndTime() << ","
-                << current->event.getLocation() << endl;
+                << current->event.getLocation() << " ";
 
-        // new code for attendess============================================================= save for file
+        // for attendess save for file
         auto &attendees = current->event.getAttendees();
         for (const auto &attendee : attendees)
         {
@@ -433,14 +433,16 @@ void EventLinkedList::loadEventsFromFile(string &filename)
         stringstream ss(line);
         string token;
         vector<string> tokens;
+
+        // Split the line into tokens using comma as the delimiter
         while (getline(ss, token, ','))
         {
             tokens.push_back(token);
         }
 
-        if (tokens.size() != 7)
+        // Check if there are at least 7 tokens (event details)
+        if (tokens.size() < 7)
         {
-            // cerr << "Invalid data format in file: " << filename << endl;
             continue;
         }
 
@@ -452,7 +454,15 @@ void EventLinkedList::loadEventsFromFile(string &filename)
         string endT = tokens[5];
         string loc = tokens[6];
 
+        // Create a new Event object
         Event event(id, title, desc, date, startT, endT, loc);
+
+        // Add attendees to the event
+        for (size_t i = 7; i < tokens.size(); ++i)
+        {
+            event.addAttendee(tokens[i]);
+        }
+
         insertEvent(event);
     }
 

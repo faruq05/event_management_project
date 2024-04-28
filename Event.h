@@ -36,16 +36,15 @@ public:
     void setLocation(string &loc);
 
     // Methods for managing attendees
-    void addAttendee(string &attendee); //adds new attendee
+    void addAttendee(string attendee); //adds new attendee
     void removeAttendee(string &attendee); //removes an attendee
-    // bool isAttendee(string &attendee); //search attendee
     void displayAttendees(); // display all attendee for an event
-    bool hasAttendee(string &attendee); //
+    bool hasAttendee(string &attendee); //searc an attendee
 
     // Method to display event details
     void displayEventDetails();
 
-    // new code ==================================================== for attendee
+    // for attendee
     vector<string> &getAttendees();
 };
 

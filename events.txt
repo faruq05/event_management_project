@@ -1,8 +1,2 @@
-1,qwerty,qazxswedcvfr,05/07/2024,07:00,07:15,jani na
-
-14,eve04,descriptin update korlam,05/08/2024,07:00,10:00,KOI
-
-12,event02,dfg,05/04/2024,16:00,17:00,NSU
-
-11,NSU bomb,faculty mandatory,05/01/2024,10:00,13:00,NSU
-,faruq,omor
+2,eve02,eve02 des,05/02/2024,10:00,11:00,Dhaka 
+1,event01,eve1 des,05/01/2024,08:00,09:00,Dhaka ,faruq,galib,ziad,tanjid

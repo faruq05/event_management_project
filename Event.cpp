@@ -52,7 +52,6 @@ string Event::getLocation()
     return location;
 }
 
-// new code ============================================ getter for attendee
 vector<string> &Event::getAttendees()
 {
     return attendees;
@@ -89,7 +88,7 @@ void Event::setLocation(string &loc)
     location = loc;
 }
 
-void Event::addAttendee(string &attendee)
+void Event::addAttendee(string attendee)
 {
     attendees.push_back(attendee);
 }
@@ -103,12 +102,6 @@ void Event::removeAttendee(string &attendee)
         attendees.erase(it);
     }
 }
-
-// is attendee
-//  bool Event::isAttendee(string &attendee)
-//  {
-//      return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
-//  }
 
 // has attendee (Search attendee from an event)
 bool Event::hasAttendee(string &attendee)
@@ -125,7 +118,8 @@ void Event::displayAttendees()
     }
     else
     {
-        cout << "Attendees of Event ID " << eventId << ":" << endl;
+        cout << "Attendees of Event ID " << title << ":" << endl;
+        cout<<endl;
         for (string &attendee : attendees)
         {
             cout << "- " << attendee << endl;
@@ -146,8 +140,7 @@ void Event::displayEventDetails()
     cout << "Attendees: ";
     if (!attendees.empty())
     {
-        cout << "Attendees: ";
-        for (auto &attendee : attendees)
+        for (const auto &attendee : attendees)
         {
             cout << attendee << ", ";
         }
@@ -155,7 +148,7 @@ void Event::displayEventDetails()
     }
     else
     {
-        cout << "No attendees has been added for this event." << endl;
+        cout << "No attendees has been added for this event yet." << endl;
     }
 
     cout << endl;
