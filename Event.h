@@ -40,8 +40,7 @@ public:
     void removeAttendee(string &attendee); //removes an attendee
     void displayAttendees(); // display all attendee for an event
     bool hasAttendee(string &attendee); //searc an attendee
-
-    // Method to display event details
+    bool isAttendee(string &attendee);// Method to display event details
     void displayEventDetails();
 
     // for attendee

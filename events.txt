@@ -1,2 +1,2 @@
-2,eve02,eve02 des,05/02/2024,10:00,11:00,Dhaka   
-1,event01,eve1 des,05/01/2024,08:00,09:00,Dhaka   ,faruq,galib,ziad,tanjid,OMOR
+1,event01,eve1 des,05/01/2024,08:00,09:00,Dhaka    ,faruq,galib,ziad,tanjid
+2,eve02,eve02 des,05/02/2024,10:00,11:00,Dhaka    

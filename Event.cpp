@@ -110,6 +110,10 @@ void Event::removeAttendee(string &attendee)
     }
 }
 
+bool Event::isAttendee(string& attendee)  {
+    return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
+}
+
 // has attendee (Search attendee from an event)
 bool Event::hasAttendee(string &attendee)
 {
@@ -147,7 +151,7 @@ void Event::displayEventDetails()
     cout << "Attendees: ";
     if (!attendees.empty())
     {
-        for (const auto &attendee : attendees)
+        for ( auto &attendee : attendees)
         {
             cout << attendee << ", ";
         }
