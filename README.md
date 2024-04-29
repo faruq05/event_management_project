@@ -3,18 +3,22 @@
 **1. Introduction**
 ----------------------
 
+
 a.	Project Overview:
+
 In this project, we created an event management system using C++ with Linked List structure. The objective is to let the users manage their events easily. Our project allows users to create, update, delete and search for events. It also facilitates organizing attendees and save event details in one place.
 
+
 b.	Project Objective:
+
 Our goal of this project is:
-•	Allow users to create events
-•	Allow users to update their particular event
-•	Allow users to search for an event
-•	Allow users to see if their event conflicts with any existing event
-•	Allow users to delete events
-•	Allow users to add, delete and view attendees for their events
-•	Allow user to save event information
+1. Allow users to create events
+2. Allow users to update their particular event
+3. Allow users to search for an event
+4. Allow users to see if their event conflicts with any existing event
+5. Allow users to delete events
+6. Allow users to add, delete and view attendees for their events
+7. Allow user to save event information
 
 
 
@@ -22,26 +26,32 @@ Our goal of this project is:
 -------------------
 This program has the following components: Event.h and EventLinkedList.h, associated with Event.cpp and EventLinkedList.cpp respective implementation files. Further, there is a main.cpp file containing the main function. The command line interface (CLI) approach is used for building the user interface.
 
+
 a.	Event operation:
+
 For this operation, the following methods are:
-•	void EventLinkedList::insertEvent(Event &e)
-•	void EventLinkedList::deleteEvent(int eventId)
-•	void EventLinkedList::searchEventByTitle(string &title)
-•	void EventLinkedList::updateEvent(int eventId)
-•	void EventLinkedList::displayAllEvents()
-•	void Event::displayEventDetails()
-•	bool EventLinkedList::hasScheduleConflict(Event &newEvent)
+1. void EventLinkedList::insertEvent(Event &e)
+2. void EventLinkedList::deleteEvent(int eventId)
+3. void EventLinkedList::searchEventByTitle(string &title)
+4. void EventLinkedList::updateEvent(int eventId)
+5. void EventLinkedList::displayAllEvents()
+6. void Event::displayEventDetails()
+7. bool EventLinkedList::hasScheduleConflict(Event &newEvent)
+
 
 b.	Attendee Management
+
 For managing Attendee, the following methods are:
-•	void Event::addAttendee(string attendee)
-•	void Event::removeAttendee(string &attendee)
-•	bool Event::hasAttendee(string &attendee)
-•	void Event::displayAttendees()
-•	void EventLinkedList::updateEvent(int eventId)
-•	void EventLinkedList::manageAttendees(int eventId)
+1. void Event::addAttendee(string attendee)
+2. void Event::removeAttendee(string &attendee)
+3. bool Event::hasAttendee(string &attendee)
+4. void Event::displayAttendees()
+5. void EventLinkedList::updateEvent(int eventId)
+6. void EventLinkedList::manageAttendees(int eventId)
+
 
 c.	Database management
+
 In this program, we saved all the event information into the “events.txt” file. For this operation, the following methods are: 
-•	void EventLinkedList::saveEventsToFile(string &filename)
-•	void EventLinkedList::loadEventsFromFile(string &filename)
+1. void EventLinkedList::saveEventsToFile(string &filename)
+2. void EventLinkedList::loadEventsFromFile(string &filename)
