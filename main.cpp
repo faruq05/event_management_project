@@ -4,17 +4,11 @@
 #include "EventLinkedList.h"
 #include "Event.cpp"
 #include "EventLinkedList.cpp"
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define BLUE    "\033[34m"
-#define CYAN    "\033[36m"
 using namespace std;
 
 void displayMenu()
 {
-    cout << YELLOW <<"\n======= Campus Event Management System =======" << endl;
+    cout <<"\n======= Campus Event Management System =======" << endl;
     cout << "1. Create Event" << endl;
     cout << "2. Update Event" << endl;
     cout << "3. Delete Event" << endl;
@@ -24,8 +18,8 @@ void displayMenu()
     cout << "7. Save Events to File" << endl;
     // cout << "8. Load Events from File" << endl;
     cout << "8. Exit" << endl;
-    cout << "=============================================" << RESET << endl;
-    cout << BLUE << "Enter your choice: "<< RESET;
+    cout << "=============================================" << endl;
+    cout << "Enter your choice:"<<endl ;
 }
 
 int main()
@@ -47,7 +41,7 @@ int main()
         {
             int id;
             string title, desc, date, startT, endT, loc;
-            cout << BLUE << "Enter event ID: " << RESET;
+            cout << "Enter event ID: ";
             cin >> id;
             cin.ignore();
             cout << "Enter event title: ";
@@ -72,14 +66,14 @@ int main()
             else
             {
                 eventList.insertEvent(newEvent);
-                cout << GREEN << "Event created successfully." << RESET << endl;
+                cout << "Event created successfully." << endl;
             }
             break;
         }
         case '2':
         {
             int id;
-            cout << BLUE << "Enter event ID to update: " << RESET;
+            cout << "Enter event ID to update: ";
             cin >> id;
             eventList.updateEvent(id);
             break;
@@ -87,7 +81,7 @@ int main()
         case '3':
         {
             int id;
-            cout << BLUE << "Enter event ID to delete: " << RESET;
+            cout << "Enter event ID to delete: ";
             cin >> id;
             cout << endl;
             eventList.deleteEvent(id);
@@ -102,7 +96,7 @@ int main()
         case '5':
         {
             string title;
-            cout << BLUE << "Enter event title to search: " << RESET;
+            cout << "Enter event title to search: ";
             cout << endl;
             getline(cin, title);
             eventList.searchEventByTitle(title);
@@ -111,7 +105,7 @@ int main()
         case '6':
         {
             int id;
-            cout << BLUE << "Enter event ID to manage attendees: " << RESET;
+            cout << "Enter event ID to manage attendees: ";
             cin >> id;
             eventList.manageAttendees(id);
             break;
@@ -124,11 +118,11 @@ int main()
             {
                 filename = "events.txt"; // Use the default filename if it exists
                 eventList.saveEventsToFile(filename);
-                cout << GREEN << "Events saved to " << filename << " successfully." << RESET << endl;
+                cout << "Events saved to " << filename << " successfully." << endl;
             }
             else
             {
-                cout << BLUE << "Enter filename to save events: " << RESET;
+                cout << "Enter filename to save events: ";
                 cin >> filename;
                 eventList.saveEventsToFile(filename);
             }
@@ -143,10 +137,10 @@ int main()
         //     break;
         // }
         case '8':
-            cout << YELLOW << "Exiting Campus Event Management System." << RESET << endl;
+            cout  << "Exiting Campus Event Management System." << endl;
             break;
         default:
-            cout << RED << "Invalid choice. Please try again." << RESET << endl;
+            cout << "Invalid choice. Please try again." << endl;
         }
     } while (choice != '8');
 

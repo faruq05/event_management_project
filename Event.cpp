@@ -1,13 +1,6 @@
 #include "Event.h"
 #include <iostream>
 #include <algorithm>
-#define RESET   "\033[0m"
-#define RED     "\033[31m"
-#define GREEN   "\033[32m"
-#define YELLOW  "\033[33m"
-#define BLUE    "\033[34m"
-#define CYAN    "\033[36m"
-#define WHITE "\033[37m"
 using namespace std;
 
 // Event::Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc)
@@ -125,7 +118,7 @@ void Event::displayAttendees()
 {
     if (attendees.empty())
     {
-        cout << RED << "No attendees for this event." << RESET << endl;
+        cout << "No attendees for this event." << endl;
     }
     else
     {
@@ -133,7 +126,7 @@ void Event::displayAttendees()
         cout<<endl;
         for (string &attendee : attendees)
         {
-            cout << WHITE << "- " << attendee << RESET << endl;
+            cout << "- " << attendee << endl;
         }
     }
 }
