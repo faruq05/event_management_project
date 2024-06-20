@@ -136,9 +136,8 @@ void EventLinkedList::updateEvent(int eventId)
         cout << "4. Update the Start Time" << endl;
         cout << "5. Update the End Time" << endl;
         cout << "6. Update the Location" << endl;
-        cout << "7. Update the Attendees " << endl;
         cout << "0. Done Updating" << endl;
-        cout << "Enter your choice: " << endl;
+        cout << "Enter your choice: ";
         getline(cin >> ws, choice);
 
         if (choice == "1")
@@ -189,10 +188,6 @@ void EventLinkedList::updateEvent(int eventId)
             event.setLocation(newLocation);
             updateMade = true;
         }
-        else if (choice == "7")
-        {
-            cout << "Attendee management not implemented yet." << endl;
-        }
         else if (choice == "0")
         {
             break;
@@ -238,7 +233,7 @@ void EventLinkedList::manageAttendees(int eventId)
         cout << "2. Remove attendee" << endl;
         cout << "3. Display attendees" << endl;
         cout << "4. Exit" << endl;
-        cout << "Enter your choice: " << endl;
+        cout << "Enter your choice: ";
         cin >> choice;
 
         switch (choice)
@@ -246,19 +241,19 @@ void EventLinkedList::manageAttendees(int eventId)
         case '1':
         {
             string attendeeName;
-            cout << "Enter attendee names to add (enter 's' to stop):" <<endl;
+            cout << "Enter attendee names to add (enter 's' to stop):" << endl;
             while (cin >> attendeeName && attendeeName != "s")
             {
                 eventNode->event.addAttendee(attendeeName);
                 cout << attendeeName << " added to attendees." << endl;
-                cout << "Enter next attendee (or 's' to stop): "  << endl;
+                cout << "Enter next attendee (or 's' to stop): " << endl;
             }
             break;
         }
         case '2':
         {
             string attendeeName;
-            cout << "Enter attendee name to remove: "<<endl;
+            cout << "Enter attendee name to remove: " << endl;
             cin >> attendeeName;
             if (eventNode->event.isAttendee(attendeeName)) // Check if attendee is in the list
             {
@@ -282,7 +277,6 @@ void EventLinkedList::manageAttendees(int eventId)
         }
     } while (choice != '4');
 }
-
 
 // Check for schedule conflict with a new event
 bool EventLinkedList::hasScheduleConflict(Event &newEvent)

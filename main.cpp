@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <ctime>
+#include <conio.h>
 #include "Event.h"
 #include "EventLinkedList.h"
 #include "Event.cpp"
@@ -20,25 +21,42 @@ void displayMenu(bool isAdmin)
         cout << "5. Search Event by Title" << endl;
         cout << "6. Manage Attendees of an Event" << endl;
         cout << "7. Save Events to File" << endl;
-        cout << "8. Exit" << endl;
-        cout << "9. Back to Login" << endl; // Adding back button for admin
+        cout << "8. Back to Login" << endl;
+        cout << "9. Exit" << endl;
     }
     else
     {
         cout << "1. Display All Events" << endl;
         cout << "2. Search Event by Title" << endl;
-        cout << "3. Exit" << endl;
-        cout << "4. Back to Login" << endl; // Adding back button for user
+        cout << "3. Back to Login" << endl;
+        cout << "4. Exit" << endl;
     }
     cout << "=============================================" << endl;
-    cout << "Enter your choice:" << endl;
+    cout << "Enter your choice:";
 }
 
 bool loginAsAdmin()
 {
     string password;
     cout << "Enter admin password: ";
-    cin >> password;
+    char ch;
+    while ((ch = _getch()) != '\r') // '\r' is carriage return, equivalent to Enter key
+    {
+        if (ch == '\b') // Handle backspace
+        {
+            if (!password.empty())
+            {
+                cout << "\b \b";
+                password.pop_back();
+            }
+        }
+        else
+        {
+            password.push_back(ch);
+            cout << '*';
+        }
+    }
+    cout << endl;
     return password == "admin123"; // Predefined password
 }
 
@@ -132,7 +150,7 @@ int main()
         cout << "2. User Panel" << endl;
         cout << "3. Exit" << endl;
         cout << "=============================================" << endl;
-        cout << "Enter your choice:" << endl;
+        cout << "Enter your choice:";
         int userType;
         cin >> userType;
         if (userType == 1)
@@ -322,34 +340,38 @@ int main()
                 }
                 case '7':
                 {
-                    string filename;
-                    ifstream file_check("events.txt"); // Check if the file exists
-                    if (file_check.good())
+                    string filename = "events.txt";          // Default filename
+                    ofstream file_check(filename, ios::app); // Open the file in append mode to check existence
+
+                    if (file_check.is_open())
                     {
-                        filename = "events.txt"; // Use the default filename if it exists
+                        file_check.close(); // Close the file stream
                         eventList.saveEventsToFile(filename);
                         cout << "Events saved to " << filename << " successfully." << endl;
                     }
                     else
                     {
-                        cout << "Enter filename to save events (or 'b' to go back): ";
+                        cout << "Could not open file " << filename << ". Please enter a different filename: ";
                         string input;
                         cin >> input;
+
                         if (input == "b")
                             break;
+
                         filename = input;
                         eventList.saveEventsToFile(filename);
                     }
                     break;
                 }
+
                 case '8':
+                    cout << "Going back to login menu." << endl;
+                    exitMenu = true;
+                    break;
+                case '9':
                     cout << "Exiting Campus Event Management System." << endl;
                     cout << "Have a nice day!" << endl;
                     exit(0); // Terminates the program
-                    break;
-                case '9':
-                    cout << "Going back to login menu." << endl;
-                    exitMenu = true;
                     break;
                 default:
                     cout << "Invalid choice. Please try again." << endl;
@@ -377,13 +399,13 @@ int main()
                     break;
                 }
                 case '3':
+                    cout << "Going back to login menu." << endl;
+                    exitMenu = true;
+                    break;
+                case '4':
                     cout << "Exiting Campus Event Management System." << endl;
                     cout << "Have a nice day!" << endl;
                     exit(0); // Terminates the program
-                    break;
-                case '4':
-                    cout << "Going back to login menu." << endl;
-                    exitMenu = true;
                     break;
                 default:
                     cout << "Invalid choice. Please try again." << endl;
