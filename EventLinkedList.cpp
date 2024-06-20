@@ -4,11 +4,86 @@
 #include <sstream>
 using namespace std;
 
+
+//date validation
+bool isValidDate(const string &date)  //O(1)
+{
+    if (date.size() != 10 ||
+        !isdigit(date[0]) || !isdigit(date[1]) || date[2] != '/' ||
+        !isdigit(date[3]) || !isdigit(date[4]) ||
+        date[5] != '/' ||
+        !isdigit(date[6]) || !isdigit(date[7]) || !isdigit(date[8]) || !isdigit(date[9]))
+    {
+        return false;
+    }
+
+    int month = stoi(date.substr(0, 2));
+    int day = stoi(date.substr(3, 2));
+    int year = stoi(date.substr(6, 4));
+
+    if (month < 1 || month > 12 || day < 1 || day > 31 || year < 2024)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool isValidTime(const string &time) //O(1)
+{
+    if (time.size() != 5 ||
+        !isdigit(time[0]) || !isdigit(time[1]) ||
+        time[2] != ':' ||
+        !isdigit(time[3]) || !isdigit(time[4]))
+    {
+        return false;
+    }
+
+    int hour = stoi(time.substr(0, 2));
+    int minute = stoi(time.substr(3, 2));
+
+    if (hour < 0 || hour > 23 || minute < 0 || minute > 59)
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool isFutureDateTime(const string &date, const string &time) //O(1)
+{
+    // Parse the date and time
+    int month = stoi(date.substr(0, 2));
+    int day = stoi(date.substr(3, 2));
+    int year = stoi(date.substr(6, 4));
+    int hour = stoi(time.substr(0, 2));
+    int minute = stoi(time.substr(3, 2));
+
+    // Get current date and time
+    time_t now = std::time(0);
+    tm *ltm = std::localtime(&now);
+
+    if (year < 1900 + ltm->tm_year)
+        return false;
+    if (year == 1900 + ltm->tm_year && month < 1 + ltm->tm_mon)
+        return false;
+    if (year == 1900 + ltm->tm_year && month == 1 + ltm->tm_mon && day < ltm->tm_mday)
+        return false;
+    if (year == 1900 + ltm->tm_year && month == 1 + ltm->tm_mon && day == ltm->tm_mday)
+    {
+        if (hour < ltm->tm_hour)
+            return false;
+        if (hour == ltm->tm_hour && minute <= ltm->tm_min)
+            return false;
+    }
+
+    return true;
+}
 // constructor
 EventLinkedList::EventLinkedList() : head(nullptr) {}
 
-// Destructor
-EventLinkedList::~EventLinkedList()
+// Destructor   O(n)
+EventLinkedList::~EventLinkedList() 
 {
     EventNode *current = head;
     while (current != nullptr)
@@ -62,7 +137,7 @@ void EventLinkedList::deleteEvent(int eventId)
     cout << "Event with ID " << eventId << " deleted successfully." << endl;
 }
 
-// Find an event in the linked list by event ID
+// Find an event in the linked list by event ID    O(n)
 EventLinkedList::EventNode *EventLinkedList::findEventById(int eventId)
 {
     EventNode *current = head;
@@ -77,7 +152,7 @@ EventLinkedList::EventNode *EventLinkedList::findEventById(int eventId)
     return nullptr; // Event not found
 }
 
-// Display details of all events in the linked list
+// Display details of all events in the linked list     O(n)
 void EventLinkedList::displayAllEvents()
 {
     EventNode *current = head;
@@ -88,7 +163,7 @@ void EventLinkedList::displayAllEvents()
     }
 }
 
-// Search for an event in the linked list by title
+// Search for an event in the linked list by title  O(n)
 void EventLinkedList::searchEventByTitle(string &title)
 {
     EventNode *current = head;
@@ -110,7 +185,7 @@ void EventLinkedList::searchEventByTitle(string &title)
     }
 }
 
-// Update details of an event in the linked list
+// Update details of an event in the linked list    O(n)
 void EventLinkedList::updateEvent(int eventId)
 {
     EventNode *eventNode = findEventById(eventId);
@@ -157,9 +232,19 @@ void EventLinkedList::updateEvent(int eventId)
         }
         else if (choice == "3")
         {
+            bool validDate = false;
             string newDate;
-            cout << "Enter new date (MM/DD/YYYY): ";
-            getline(cin >> ws, newDate);
+            while (!validDate)
+            {
+                cout << "Enter event date (MM/DD/YYYY): ";
+                getline(cin >> ws, newDate);
+                validDate = isValidDate(newDate);
+                if (!validDate)
+                {
+                    cout << "Invalid date format. Please enter date in MM/DD/YYYY format." << endl;
+                    continue;
+                }
+            }
             event.setDate(newDate);
             updateMade = true;
         }
@@ -207,7 +292,7 @@ void EventLinkedList::updateEvent(int eventId)
     }
 }
 
-// Implementation of manageAttendees method
+// Implementation of manageAttendees method     O(n)
 void EventLinkedList::manageAttendees(int eventId)
 {
     EventNode *eventNode = findEventById(eventId);
@@ -278,7 +363,7 @@ void EventLinkedList::manageAttendees(int eventId)
     } while (choice != '4');
 }
 
-// Check for schedule conflict with a new event
+// Check for schedule conflict with a new event     O(n)
 bool EventLinkedList::hasScheduleConflict(Event &newEvent)
 {
     EventNode *current = head;
@@ -296,7 +381,7 @@ bool EventLinkedList::hasScheduleConflict(Event &newEvent)
     return false;
 }
 
-// Save all events in the linked list to a file
+// Save all events in the linked list to a file     O(n)
 void EventLinkedList::saveEventsToFile(string &filename)
 {
     ofstream outFile(filename);
@@ -330,7 +415,7 @@ void EventLinkedList::saveEventsToFile(string &filename)
     outFile.close();
 }
 
-// Load events from a file into the linked list
+// Load events from a file into the linked list     O(n)
 void EventLinkedList::loadEventsFromFile(string &filename)
 {
     ifstream inFile(filename);

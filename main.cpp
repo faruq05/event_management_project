@@ -60,81 +60,6 @@ bool loginAsAdmin()
     return password == "admin123"; // Predefined password
 }
 
-bool isValidDate(const string &date)
-{
-    if (date.size() != 10 ||
-        !isdigit(date[0]) || !isdigit(date[1]) ||
-        date[2] != '/' ||
-        !isdigit(date[3]) || !isdigit(date[4]) ||
-        date[5] != '/' ||
-        !isdigit(date[6]) || !isdigit(date[7]) || !isdigit(date[8]) || !isdigit(date[9]))
-    {
-        return false;
-    }
-
-    int month = stoi(date.substr(0, 2));
-    int day = stoi(date.substr(3, 2));
-    int year = stoi(date.substr(6, 4));
-
-    if (month < 1 || month > 12 || day < 1 || day > 31 || year < 2023)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-bool isValidTime(const string &time)
-{
-    if (time.size() != 5 ||
-        !isdigit(time[0]) || !isdigit(time[1]) ||
-        time[2] != ':' ||
-        !isdigit(time[3]) || !isdigit(time[4]))
-    {
-        return false;
-    }
-
-    int hour = stoi(time.substr(0, 2));
-    int minute = stoi(time.substr(3, 2));
-
-    if (hour < 0 || hour > 23 || minute < 0 || minute > 59)
-    {
-        return false;
-    }
-
-    return true;
-}
-
-bool isFutureDateTime(const string &date, const string &time)
-{
-    // Parse the date and time
-    int month = stoi(date.substr(0, 2));
-    int day = stoi(date.substr(3, 2));
-    int year = stoi(date.substr(6, 4));
-    int hour = stoi(time.substr(0, 2));
-    int minute = stoi(time.substr(3, 2));
-
-    // Get current date and time
-    time_t now = std::time(0);
-    tm *ltm = std::localtime(&now);
-
-    if (year < 1900 + ltm->tm_year)
-        return false;
-    if (year == 1900 + ltm->tm_year && month < 1 + ltm->tm_mon)
-        return false;
-    if (year == 1900 + ltm->tm_year && month == 1 + ltm->tm_mon && day < ltm->tm_mday)
-        return false;
-    if (year == 1900 + ltm->tm_year && month == 1 + ltm->tm_mon && day == ltm->tm_mday)
-    {
-        if (hour < ltm->tm_hour)
-            return false;
-        if (hour == ltm->tm_hour && minute <= ltm->tm_min)
-            return false;
-    }
-
-    return true;
-}
-
 int main()
 {
     EventLinkedList eventList; // Create an instance of EventLinkedList
@@ -155,7 +80,7 @@ int main()
         cin >> userType;
         if (userType == 1)
         {
-            isAdmin = loginAsAdmin();
+            isAdmin = loginAsAdmin();  
             if (!isAdmin)
             {
                 cout << "Incorrect password. Access denied." << endl;
@@ -201,7 +126,7 @@ int main()
                         if (input == "b")
                             break;
                         id = stoi(input);
-                        cin.ignore();
+                        cin.ignore();         // ignore space before input
                         cout << "Enter event title: ";
                         getline(cin >> ws, title);
                         cout << "Enter event description: ";
@@ -215,7 +140,7 @@ int main()
                             validDate = isValidDate(date);
                             if (!validDate)
                             {
-                                cout << "Invalid date format or Past date not accepted. Please enter date in MM/DD/YYYY format." << endl;
+                                cout << "Invalid date format. Please enter date in MM/DD/YYYY format." << endl;
                                 continue;
                             }
 
@@ -223,7 +148,7 @@ int main()
                             getline(cin >> ws, startT);
                             if (!isValidTime(startT))
                             {
-                                cout << "Invalid start time format or Past time not accepted. Please enter time in HH:MM format." << endl;
+                                cout << "Invalid start time format. Please enter time in HH:MM format." << endl;
                                 validDate = false; // To repeat the loop
                                 continue;
                             }
