@@ -3,8 +3,6 @@
 #include <algorithm>
 using namespace std;
 
-// Event::Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc)
-//     : eventId(id), title(t), description(desc), date(d), startTime(startT), endTime(endT), location(loc) {}
 Event::Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc)
 {
     this->eventId = id;
@@ -88,6 +86,7 @@ void Event::setLocation(string &loc)
     location = loc;
 }
 
+//add attendee
 void Event::addAttendee(string attendee)
 {
     attendees.push_back(attendee);

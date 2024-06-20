@@ -18,7 +18,6 @@ private:
     vector<string> attendees; //manage the list of attendee
 
 public:
-    //    Event(int id, string &t, string &desc, string &d, string &tme, string &loc);
     Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc);
 
     int getEventId();
@@ -41,10 +40,8 @@ public:
     void displayAttendees(); // display all attendee for an event
     bool hasAttendee(string &attendee); //searc an attendee
     bool isAttendee(string &attendee);// Method to display event details
-    void displayEventDetails();
-
-    // for attendee
-    vector<string> &getAttendees();
+    void displayEventDetails(); // display attendee
+    vector<string> &getAttendees(); // get attendee
 };
 
 #endif // EVENT_H
