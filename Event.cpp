@@ -86,13 +86,13 @@ void Event::setLocation(string &loc)
     location = loc;
 }
 
-//add attendee
+//add attendee  O(1)
 void Event::addAttendee(string attendee)
 {
     attendees.push_back(attendee);
 }
 
-// remove an attendee
+// remove an attendee   O(n)
 void Event::removeAttendee(string &attendee)
 {
     auto it = find(attendees.begin(), attendees.end(), attendee);
@@ -102,17 +102,12 @@ void Event::removeAttendee(string &attendee)
     }
 }
 
+// is attendee      O(n)
 bool Event::isAttendee(string& attendee)  {
     return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
 }
 
-// has attendee (Search attendee from an event)
-bool Event::hasAttendee(string &attendee)
-{
-    return find(attendees.begin(), attendees.end(), attendee) != attendees.end();
-}
-
-// display attendee (Shows all attendee for an event)
+// display attendee     O(n)
 void Event::displayAttendees()
 {
     if (attendees.empty())
@@ -130,7 +125,7 @@ void Event::displayAttendees()
     }
 }
 
-// display event details
+// display event details    O(1)
 void Event::displayEventDetails()
 {
     cout << "Event ID: " << eventId << endl;

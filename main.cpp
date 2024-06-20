@@ -76,7 +76,7 @@ bool isValidDate(const string &date)
     int day = stoi(date.substr(3, 2));
     int year = stoi(date.substr(6, 4));
 
-    if (month < 1 || month > 12 || day < 1 || day > 31 || year < 2021)
+    if (month < 1 || month > 12 || day < 1 || day > 31 || year < 2023)
     {
         return false;
     }
@@ -215,7 +215,7 @@ int main()
                             validDate = isValidDate(date);
                             if (!validDate)
                             {
-                                cout << "Invalid date format. Please enter date in MM/DD/YYYY format." << endl;
+                                cout << "Invalid date format or Past date not accepted. Please enter date in MM/DD/YYYY format." << endl;
                                 continue;
                             }
 
@@ -223,7 +223,7 @@ int main()
                             getline(cin >> ws, startT);
                             if (!isValidTime(startT))
                             {
-                                cout << "Invalid start time format. Please enter time in HH:MM format." << endl;
+                                cout << "Invalid start time format or Past time not accepted. Please enter time in HH:MM format." << endl;
                                 validDate = false; // To repeat the loop
                                 continue;
                             }

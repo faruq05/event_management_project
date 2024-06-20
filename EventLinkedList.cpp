@@ -10,7 +10,6 @@ EventLinkedList::EventLinkedList() : head(nullptr) {}
 // Destructor
 EventLinkedList::~EventLinkedList()
 {
-    // Implement destructor to free memory (delete all nodes)
     EventNode *current = head;
     while (current != nullptr)
     {
@@ -20,7 +19,7 @@ EventLinkedList::~EventLinkedList()
     }
 }
 
-// Insert a new event into the linked list
+// Insert a new event into the linked list      O(1)
 void EventLinkedList::insertEvent(Event &e)
 {
     if (hasScheduleConflict(e))
@@ -32,7 +31,7 @@ void EventLinkedList::insertEvent(Event &e)
     head = newNode;
 }
 
-// Delete an event from the linked list by event ID
+// Delete an event from the linked list by event ID     O(n)
 void EventLinkedList::deleteEvent(int eventId)
 {
     EventNode *current = head;
@@ -221,6 +220,7 @@ void EventLinkedList::manageAttendees(int eventId)
     char choice;
     do
     {
+        // displaying the event details for manage attendee
         cout << "\nEvent ID: " << eventId << endl;
         cout << "Title: " << eventNode->event.getTitle() << endl;
         cout << "Description: " << eventNode->event.getDescription() << endl;
@@ -324,7 +324,6 @@ void EventLinkedList::saveEventsToFile(string &filename)
             outFile << "," << attendee;
         }
         outFile << endl;
-        // ends
         current = current->next;
     }
 
@@ -348,7 +347,7 @@ void EventLinkedList::loadEventsFromFile(string &filename)
         string token;
         vector<string> tokens;
 
-        // Split the line into tokens using comma as the delimiter
+        // Split
         while (getline(ss, token, ','))
         {
             tokens.push_back(token);

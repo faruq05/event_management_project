@@ -15,7 +15,7 @@ private:
     string startTime;
     string endTime;
     string location;
-    vector<string> attendees; //manage the list of attendee
+    vector<string> attendees; // manage the list of attendee
 
 public:
     Event(int id, string &t, string &desc, string &d, string &startT, string &endT, string &loc);
@@ -35,13 +35,13 @@ public:
     void setLocation(string &loc);
 
     // Methods for managing attendees
-    void addAttendee(string attendee); //adds new attendee
-    void removeAttendee(string &attendee); //removes an attendee
-    void displayAttendees(); // display all attendee for an event
-    bool hasAttendee(string &attendee); //searc an attendee
-    bool isAttendee(string &attendee);// Method to display event details
-    void displayEventDetails(); // display attendee
-    vector<string> &getAttendees(); // get attendee
+    void addAttendee(string attendee);     // adds new attendee
+    void removeAttendee(string &attendee); // removes an attendee
+    void displayAttendees();               // display all attendee for an event
+    bool isAttendee(string &attendee);     // Method to display event details
+    void displayEventDetails();            // display attendee
+    vector<string> &getAttendees();        // get attendee
+    
 };
 
 #endif // EVENT_H
