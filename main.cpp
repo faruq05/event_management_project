@@ -40,9 +40,9 @@ bool loginAsAdmin()
     string password;
     cout << "Enter admin password: ";
     char ch;
-    while ((ch = _getch()) != '\r') // '\r' is carriage return, equivalent to Enter key
+    while ((ch = _getch()) != '\r')
     {
-        if (ch == '\b') // Handle backspace
+        if (ch == '\b')
         {
             if (!password.empty())
             {
@@ -57,7 +57,7 @@ bool loginAsAdmin()
         }
     }
     cout << endl;
-    return password == "admin123"; // Predefined password
+    return password == "admin123"; // hardcode password
 }
 
 int main()
@@ -126,7 +126,7 @@ int main()
                         if (input == "b")
                             break;
                         id = stoi(input);
-                        cin.ignore();         // ignore space before input
+                        cin.ignore();       
                         cout << "Enter event title: ";
                         getline(cin >> ws, title);
                         cout << "Enter event description: ";

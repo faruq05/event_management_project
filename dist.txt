@@ -1,0 +1,4 @@
+Galib---------     Time,Date,Display Menu,Main-if
+Tanzid--------     Event.h,Event.cpp,ManageAttendee,Main-else
+Ziad----------     UpdateEvent,HasConflict,Save,Load,Log-in
+Omor ---------     EventLinkedList.h,InsertEvent,Delete,Search,DisplayAttendee 

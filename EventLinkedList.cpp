@@ -94,7 +94,7 @@ EventLinkedList::~EventLinkedList()
     }
 }
 
-// Insert a new event into the linked list      O(1)
+// Insert      O(1)
 void EventLinkedList::insertEvent(Event &e)
 {
     if (hasScheduleConflict(e))
@@ -106,7 +106,7 @@ void EventLinkedList::insertEvent(Event &e)
     head = newNode;
 }
 
-// Delete an event from the linked list by event ID     O(n)
+// Delete by event ID     O(n)
 void EventLinkedList::deleteEvent(int eventId)
 {
     EventNode *current = head;
@@ -137,7 +137,7 @@ void EventLinkedList::deleteEvent(int eventId)
     cout << "Event with ID " << eventId << " deleted successfully." << endl;
 }
 
-// Find an event in the linked list by event ID    O(n)
+// Find an event by event ID    O(n)
 EventLinkedList::EventNode *EventLinkedList::findEventById(int eventId)
 {
     EventNode *current = head;
@@ -152,7 +152,7 @@ EventLinkedList::EventNode *EventLinkedList::findEventById(int eventId)
     return nullptr; // Event not found
 }
 
-// Display details of all events in the linked list     O(n)
+// Display details     O(n)
 void EventLinkedList::displayAllEvents()
 {
     EventNode *current = head;
@@ -163,7 +163,7 @@ void EventLinkedList::displayAllEvents()
     }
 }
 
-// Search for an event in the linked list by title  O(n)
+// Search for an event by title  O(n)
 void EventLinkedList::searchEventByTitle(string &title)
 {
     EventNode *current = head;
@@ -185,7 +185,7 @@ void EventLinkedList::searchEventByTitle(string &title)
     }
 }
 
-// Update details of an event in the linked list    O(n)
+// Update details    O(n)
 void EventLinkedList::updateEvent(int eventId)
 {
     EventNode *eventNode = findEventById(eventId);
@@ -292,7 +292,7 @@ void EventLinkedList::updateEvent(int eventId)
     }
 }
 
-// Implementation of manageAttendees method     O(n)
+// manageAttendees      O(n)
 void EventLinkedList::manageAttendees(int eventId)
 {
     EventNode *eventNode = findEventById(eventId);
@@ -363,7 +363,7 @@ void EventLinkedList::manageAttendees(int eventId)
     } while (choice != '4');
 }
 
-// Check for schedule conflict with a new event     O(n)
+// schedule conflict with a new event     O(n)
 bool EventLinkedList::hasScheduleConflict(Event &newEvent)
 {
     EventNode *current = head;
@@ -381,7 +381,7 @@ bool EventLinkedList::hasScheduleConflict(Event &newEvent)
     return false;
 }
 
-// Save all events in the linked list to a file     O(n)
+// Save all events into events.txt file     O(n)
 void EventLinkedList::saveEventsToFile(string &filename)
 {
     ofstream outFile(filename);
@@ -415,7 +415,7 @@ void EventLinkedList::saveEventsToFile(string &filename)
     outFile.close();
 }
 
-// Load events from a file into the linked list     O(n)
+// Load events from events.txt file    O(n)
 void EventLinkedList::loadEventsFromFile(string &filename)
 {
     ifstream inFile(filename);
@@ -438,7 +438,7 @@ void EventLinkedList::loadEventsFromFile(string &filename)
             tokens.push_back(token);
         }
 
-        // Check if there are at least 7 tokens (event details)
+        // event details has 7 elements, so 7 tokens
         if (tokens.size() < 7)
         {
             continue;
