@@ -2,8 +2,8 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 using namespace std;
-
 
 //date validation
 bool isValidDate(const string &date)  //O(1)
@@ -61,7 +61,7 @@ bool isFutureDateTime(const string &date, const string &time) //O(1)
 
     // Get current date and time
     time_t now = std::time(0);
-    tm *ltm = std::localtime(&now);
+    tm *ltm = localtime(&now);
 
     if (year < 1900 + ltm->tm_year)
         return false;
