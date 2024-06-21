@@ -28,8 +28,9 @@ void displayMenu(bool isAdmin)
     {
         cout << "1. Display All Events" << endl;
         cout << "2. Search Event by Title" << endl;
-        cout << "3. Back to Login" << endl;
-        cout << "4. Exit" << endl;
+        cout << "3. Attendee Visits" << endl;
+        cout << "4. Back to Login" << endl;
+        cout << "5. Exit" << endl;
     }
     cout << "=============================================" << endl;
     cout << "Enter your choice:";
@@ -80,7 +81,7 @@ int main()
         cin >> userType;
         if (userType == 1)
         {
-            isAdmin = loginAsAdmin();  
+            isAdmin = loginAsAdmin();
             if (!isAdmin)
             {
                 cout << "Incorrect password. Access denied." << endl;
@@ -126,7 +127,7 @@ int main()
                         if (input == "b")
                             break;
                         id = stoi(input);
-                        cin.ignore();       
+                        cin.ignore();
                         cout << "Enter event title: ";
                         getline(cin >> ws, title);
                         cout << "Enter event description: ";
@@ -324,10 +325,21 @@ int main()
                     break;
                 }
                 case '3':
+                    while (true)
+                    {
+                        string attendee;
+                        cout << "Enter attendee name to check visited events (or 'b' to go back): ";
+                        getline(cin >> ws, attendee);
+                        if (attendee == "b")
+                            break;
+                        eventList.attendeeVisited(attendee);
+                    }
+                    break;
+                case '4':
                     cout << "Going back to login menu." << endl;
                     exitMenu = true;
                     break;
-                case '4':
+                case '5':
                     cout << "Exiting Campus Event Management System." << endl;
                     cout << "Have a nice day!" << endl;
                     exit(0); // Terminates the program

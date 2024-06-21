@@ -156,3 +156,25 @@ void Event::displayEventDetails()
 
     cout << endl;
 }
+
+// Function to show events attended by a specific attendee O(n)
+void Event::attendeeVisited(const string& attendee)
+{
+    bool found = false;
+    for (const string& att : attendees)
+    {
+        if (att == attendee)
+        {
+            if (!found)
+            {
+                cout << "Events attended by " << attendee << ": " << endl;
+                found = true;
+            }
+            cout << "- " << title << endl; // Assuming title is the event's title
+        }
+    }
+    if (!found)
+    {
+        cout << attendee << " has not attended any events." << endl;
+    }
+}

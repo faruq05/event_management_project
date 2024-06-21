@@ -10,33 +10,35 @@ private:
     {
         Event event;
         EventNode *next;
-
         EventNode(Event &e) : event(e), next(nullptr) {}
     };
 
     EventNode *head;
 
 public:
-    EventLinkedList();  // Constructor
-    ~EventLinkedList(); // Destructor
+    EventLinkedList();
+    ~EventLinkedList();
 
     void insertEvent(Event &e);
     void deleteEvent(int eventId);
     EventNode *findEventById(int eventId);
     void displayAllEvents();
     void searchEventByTitle(string &title);
+    void updateEvent(int eventId);
+    void manageAttendees(int eventId);
+    bool hasScheduleConflict(Event &newEvent);
     void saveEventsToFile(string &filename);
     void loadEventsFromFile(string &filename);
 
-    // Update methods
-    void updateEvent(int eventId);
-    void manageAttendees(int eventId);
-    void manageEvent(int eventId);
-    bool hasScheduleConflict(Event &newEvent);
-
+    void attendeeVisited(string &attendee); // New method declaration
 
 private:
-        void displayEventDetails(Event &event);
+    void displayEventDetails(Event &event);
+
+    // private:
+    //     bool isValidDate(string &date);
+    //     bool isValidTime(string &time);
+    //     bool isFutureDateTime(string &date, string &time);
 };
 
 #endif // EVENTLINKEDLIST_H

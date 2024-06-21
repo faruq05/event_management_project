@@ -5,8 +5,8 @@
 #include <ctime>
 using namespace std;
 
-//date validation
-bool isValidDate(const string &date)  //O(1)
+// date validation
+bool isValidDate(const string &date) // O(1)
 {
     if (date.size() != 10 ||
         !isdigit(date[0]) || !isdigit(date[1]) || date[2] != '/' ||
@@ -29,7 +29,7 @@ bool isValidDate(const string &date)  //O(1)
     return true;
 }
 
-bool isValidTime(const string &time) //O(1)
+bool isValidTime(const string &time) // O(1)
 {
     if (time.size() != 5 ||
         !isdigit(time[0]) || !isdigit(time[1]) ||
@@ -50,7 +50,7 @@ bool isValidTime(const string &time) //O(1)
     return true;
 }
 
-bool isFutureDateTime(const string &date, const string &time) //O(1)
+bool isFutureDateTime(const string &date, const string &time) // O(1)
 {
     // Parse the date and time
     int month = stoi(date.substr(0, 2));
@@ -83,7 +83,7 @@ bool isFutureDateTime(const string &date, const string &time) //O(1)
 EventLinkedList::EventLinkedList() : head(nullptr) {}
 
 // Destructor   O(n)
-EventLinkedList::~EventLinkedList() 
+EventLinkedList::~EventLinkedList()
 {
     EventNode *current = head;
     while (current != nullptr)
@@ -466,4 +466,30 @@ void EventLinkedList::loadEventsFromFile(string &filename)
 
     cout << "Events loaded from " << filename << " successfully." << endl;
     inFile.close();
+}
+
+void EventLinkedList::attendeeVisited(string &attendee)
+{
+    EventNode *current = head;
+    bool foundAny = false;
+
+    while (current != nullptr)
+    {
+        // Use const_cast to cast away constness for the non-const isAttendee method
+        if (current->event.isAttendee(const_cast<string &>(attendee)))
+        {
+            if (!foundAny)
+            {
+                cout << "Attendee " << attendee << " has visited the following events:" << endl;
+                foundAny = true;
+            }
+            cout << "- " << current->event.getTitle() << endl;
+        }
+        current = current->next;
+    }
+
+    if (!foundAny)
+    {
+        cout << "Attendee " << attendee << " has not visited any events yet." << endl;
+    }
 }
