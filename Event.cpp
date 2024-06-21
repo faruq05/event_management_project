@@ -138,9 +138,14 @@ void Event::displayEventDetails()
     cout << "Attendees: ";
     if (!attendees.empty())
     {
-        for ( auto &attendee : attendees)
+        // for ( auto &attendee : attendees)
+        // {
+        //     cout << attendee << ", ";
+        // }
+        cout<<attendees.front();
+        for(auto it = next(attendees.begin()); it!= attendees.end(); ++it)
         {
-            cout << attendee << ", ";
+            cout << ", " << *it;
         }
         cout << endl;
     }
