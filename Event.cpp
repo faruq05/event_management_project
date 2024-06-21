@@ -170,7 +170,7 @@ void Event::attendeeVisited(const string& attendee)
                 cout << "Events attended by " << attendee << ": " << endl;
                 found = true;
             }
-            cout << "- " << title << endl; // Assuming title is the event's title
+            cout << "- " << title << endl; 
         }
     }
     if (!found)

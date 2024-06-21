@@ -30,15 +30,10 @@ public:
     void saveEventsToFile(string &filename);
     void loadEventsFromFile(string &filename);
 
-    void attendeeVisited(string &attendee); // New method declaration
+    void attendeeVisited(string &attendee);
 
 private:
     void displayEventDetails(Event &event);
-
-    // private:
-    //     bool isValidDate(string &date);
-    //     bool isValidTime(string &time);
-    //     bool isFutureDateTime(string &date, string &time);
 };
 
 #endif // EVENTLINKEDLIST_H

@@ -41,7 +41,7 @@ public:
     bool isAttendee(string &attendee);     // Method to display event details
     void displayEventDetails();            // display attendee
     vector<string> &getAttendees();        // get attendee
-    void attendeeVisited(const string &attendee);
+    void attendeeVisited(const string &attendee); // attendee visit
 };
 
 #endif // EVENT_H

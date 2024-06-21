@@ -468,6 +468,7 @@ void EventLinkedList::loadEventsFromFile(string &filename)
     inFile.close();
 }
 
+//attendee visited events     O(n)
 void EventLinkedList::attendeeVisited(string &attendee)
 {
     EventNode *current = head;
