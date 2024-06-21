@@ -327,12 +327,15 @@ void EventLinkedList::manageAttendees(int eventId)
         {
             string attendeeName;
             cout << "Enter attendee names to add (enter 's' to stop):" << endl;
-            while (cin >> attendeeName && attendeeName != "s")
+            getline(cin >> ws, attendeeName); // Read the entire line
+
+            if (attendeeName == "s")
             {
-                eventNode->event.addAttendee(attendeeName);
-                cout << attendeeName << " added to attendees." << endl;
-                cout << "Enter next attendee (or 's' to stop): " << endl;
+                break; // Stop if 's' is entered immediately
             }
+
+            eventNode->event.addAttendee(attendeeName);
+            cout << attendeeName << " added to attendees." << endl;
             break;
         }
         case '2':
@@ -468,7 +471,7 @@ void EventLinkedList::loadEventsFromFile(string &filename)
     inFile.close();
 }
 
-//attendee visited events     O(n)
+// attendee visited events     O(n)
 void EventLinkedList::attendeeVisited(string &attendee)
 {
     EventNode *current = head;
